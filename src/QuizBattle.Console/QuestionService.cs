@@ -25,8 +25,13 @@ public class QuestionService
             throw new ArgumentOutOfRangeException("Count must not be zero or negative.");
         }
 
-
         var questions = _repo.GetAll();
+
+        if (count >= questions.Count)
+        {
+            throw new ArgumentOutOfRangeException("Count must not be equal to or greater than question count.");
+        }
+
         var result = questions
             .OrderBy(_ => Random.Shared.Next())  // pseudo-slumpordning
             .Take(count)
