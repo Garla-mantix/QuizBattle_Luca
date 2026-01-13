@@ -18,20 +18,24 @@ namespace QuizBattle.Console
             EnsureValid();
         }
 
-        public Question GetRandomQuestion()
+        public async Task<Question> GetRandomQuestionAsync(CancellationToken ct = default)
         {
-            var questions = _repository.GetAll();
+            var questions = await _repository.GetRandomAsync(
+                category: null, 
+                difficulty: null,
+                1,
+                ct);
             return questions[new Random().Next(questions.Count)];
         }
 
-        public List<Question> GetRandomQuestions(int count = 3)
+        public async Task<List<Question>> GetRandomQuestionsAsync(int count = 3, CancellationToken ct = default)
         {
             if (count <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(count), "Count must be positive.");
             }
 
-            var questions = _repository.GetAll();
+            var questions = await _repository.GetAllAsync();
 
             if (count > questions.Count)
             {

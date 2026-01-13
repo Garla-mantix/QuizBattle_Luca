@@ -6,6 +6,11 @@ namespace QuizBattle.Console
 {
     public class InMemoryQuestionRepository : IQuestionRepository
     {
+        public Task<IReadOnlyList<Question>> GetAllAsync(CancellationToken ct = default)
+        {
+            return Task.FromResult<IReadOnlyList<Question>>(QuestionUtils.SeedQuestions().AsReadOnly());
+        }
+
         public Task<Question?> GetByCodeAsync(string code, CancellationToken ct)
         {
             // seeda alla frågor

@@ -8,7 +8,7 @@ const int numberOfQuestions = 3;
 
 var repository = new InMemoryQuestionRepository();
 IQuestionService service = new QuestionService(repository);
-var questions = service.GetRandomQuestions();
+var questions = await service.GetRandomQuestionsAsync();
 
 Console.Title = "QuizBattle – Konsol (v.2 dag 1–2)";
 Console.WriteLine("Välkommen till QuizBattle!");

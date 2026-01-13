@@ -2,17 +2,23 @@
 
 public class QuizSession
 {
-    // Id
+    // Identifierar denna quiz session
+    public Guid Id { get; set; }
 
-    // StartedAtUtc
+    // starttid för denna quiz session
+    public DateTime StartedAtUtc { get; set; }
 
-    // FinishedAtUtc
+    // tiden då denna quiz session avslutades 
+    public DateTime? FinishedAtUtc { get; set; }
 
     // QuestionCount
+    public int QuestionCount { get; set; }
 
     // Answers
+    public List<Answer> Answers { get; set; } = new List<Answer>();
 
     // Score
+    public int Score => Answers.Where(answer => answer.Question.CorrectAnswerCode == answer.ChoiceCode).Count();
 
     // Start()
 
