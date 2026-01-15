@@ -1,5 +1,7 @@
 namespace QuizBattle.Application.Features.StartSession;
 
-public class StartSessionResult
-{
-}
+/// <summary>
+/// The result of starting a quiz session, including the session ID
+/// and the list of questions that belong to the session.
+/// </summary>
+public record StartSessionResult(Guid SessionId, IReadOnlyList<Question> Questions);

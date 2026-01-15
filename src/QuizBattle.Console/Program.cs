@@ -1,4 +1,3 @@
-
 const int numberOfQuestions = 3;
 
 // konfigurera dependency injection (DI) in konsol
