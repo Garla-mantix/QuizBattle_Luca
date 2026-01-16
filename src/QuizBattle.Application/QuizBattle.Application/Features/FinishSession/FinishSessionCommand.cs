@@ -1,5 +1,6 @@
 namespace QuizBattle.Application.Features.FinishSession;
 
-public class FinishSessionCommand
-{
-}
+/// <summary>
+/// A command to finish an ongoing session in the quiz application.
+/// </summary>
+public sealed record FinishSessionCommand(Guid SessionId);
