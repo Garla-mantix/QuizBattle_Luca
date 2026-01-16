@@ -4,4 +4,4 @@ namespace QuizBattle.Application.Features.StartSession;
 /// Command to initiate a quiz session. The command specifies the
 /// parameters such as the number of questions, category, and difficulty.
 /// </summary>
-public record StartSessionCommand(int QuestionCount, string? Category = null, int? Difficulty = null);
+public sealed record StartSessionCommand(int QuestionCount, string? Category = null, int? Difficulty = null);

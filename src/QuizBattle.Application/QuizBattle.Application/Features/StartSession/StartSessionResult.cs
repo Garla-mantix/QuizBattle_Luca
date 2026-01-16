@@ -4,4 +4,4 @@ namespace QuizBattle.Application.Features.StartSession;
 /// The result of starting a quiz session, including the session ID
 /// and the list of questions that belong to the session.
 /// </summary>
-public record StartSessionResult(Guid SessionId, IReadOnlyList<Question> Questions);
+public sealed record StartSessionResult(Guid SessionId, IReadOnlyList<Question> Questions);
