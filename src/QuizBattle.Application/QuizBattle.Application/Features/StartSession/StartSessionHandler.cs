@@ -3,7 +3,7 @@ namespace QuizBattle.Application.Features.StartSession;
 /// <summary>
 /// Handles the process of starting a quiz session by generating questions and creating a session.
 /// </summary>
-public class StartSessionHandler
+public sealed class StartSessionHandler
 {
     private readonly ISessionRepository _sessionRepository;
     private readonly IQuestionRepository _questionRepository;
@@ -26,9 +26,18 @@ public class StartSessionHandler
     /// <returns> Returns the ID of the created session and a generated list of quiz questions.</returns>
     public async Task<StartSessionResult> Handle(StartSessionCommand cmd, CancellationToken ct)
     {
+        if (cmd.QuestionCount <= 0)
+            throw new ArgumentOutOfRangeException(nameof(cmd.QuestionCount));
+        
         var questions = await _questionRepository.GetRandomAsync(cmd.Category, cmd.Difficulty, cmd.QuestionCount, ct);
         
-        var session = QuizSession.Create(cmd.QuestionCount);
+        var session = new QuizSession
+        {
+            Id = Guid.NewGuid(),
+            StartedAtUtc = DateTime.UtcNow,
+            QuestionCount = cmd.QuestionCount
+        };
+        
         await _sessionRepository.SaveAsync(session, ct);
 
         return new StartSessionResult(session.Id, questions);
